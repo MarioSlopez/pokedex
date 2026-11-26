@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/pokemon.dart';
 import '../services/pokeapi_service.dart';
 import '../widgets/error_view.dart';
+import '../widgets/loading_view.dart';
 import '../widgets/pokemon_card.dart';
 
 class PokedexScreen extends StatefulWidget {
@@ -61,9 +62,7 @@ class _PokedexScreenState extends State<PokedexScreen> {
                         // Estado: cargando
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return const LoadingView();
                         }
                         // Estado: error
                         if (snapshot.hasError) {
