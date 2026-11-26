@@ -48,14 +48,24 @@ class _PokedexScreenState extends State<PokedexScreen> {
               onSubmitted: (_) => _buscar(),
             ),
             const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: _buscar,
-              child: const Text('Buscar'),
-            ),
+            ElevatedButton(onPressed: _buscar, child: const Text('Buscar')),
             const SizedBox(height: 16),
             Expanded(
               child: _futuro == null
-                  ? const Center(child: Text('Escribe un nombre o un número'))
+                  ? const Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.catching_pokemon,
+                            size: 64,
+                            color: Colors.red,
+                          ),
+                          SizedBox(height: 12),
+                          Text('Escribe un nombre o un número'),
+                        ],
+                      ),
+                    )
                   : FutureBuilder<Pokemon>(
                       future: _futuro,
                       builder: (context, snapshot) {
@@ -67,8 +77,10 @@ class _PokedexScreenState extends State<PokedexScreen> {
                         // Estado: error
                         if (snapshot.hasError) {
                           return ErrorView(
-                            mensaje: '${snapshot.error}'
-                                .replaceFirst('Exception: ', ''),
+                            mensaje: '${snapshot.error}'.replaceFirst(
+                              'Exception: ',
+                              '',
+                            ),
                             onReintentar: _buscar,
                           );
                         }
