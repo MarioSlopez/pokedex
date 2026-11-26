@@ -1,17 +1,16 @@
-# pokedex_minima
+# Pokédex mínima en Flutter
 
-A new Flutter project.
+App que busca un Pokémon por nombre o número en la PokéAPI y muestra su
+imagen, id, tipos, altura, peso y estadísticas.
 
-## Getting Started
+## Estructura
+- models/pokemon.dart: modelo con fromJson
+- services/pokeapi_service.dart: petición HTTP
+- screens/pokedex_screen.dart: pantalla con FutureBuilder
+- widgets/pokemon_card.dart: ficha del Pokémon
+- widgets/error_view.dart y loading_view.dart: vistas de error y carga
+- utils/tipo_color.dart: color de cada tipo
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Ejecutar
+flutter pub get
+flutter run
