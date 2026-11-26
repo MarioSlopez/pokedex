@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/pokemon.dart';
 import '../services/pokeapi_service.dart';
+import '../widgets/error_view.dart';
 import '../widgets/pokemon_card.dart';
 
 class PokedexScreen extends StatefulWidget {
@@ -66,11 +67,10 @@ class _PokedexScreenState extends State<PokedexScreen> {
                         }
                         // Estado: error
                         if (snapshot.hasError) {
-                          return Center(
-                            child: Text(
-                              '${snapshot.error}'.replaceFirst('Exception: ', ''),
-                              textAlign: TextAlign.center,
-                            ),
+                          return ErrorView(
+                            mensaje: '${snapshot.error}'
+                                .replaceFirst('Exception: ', ''),
+                            onReintentar: _buscar,
                           );
                         }
                         // Estado: éxito
