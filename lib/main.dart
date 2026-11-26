@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'screens/pokedex_screen.dart';
 
 void main() {
-  runApp(const MiApp());
+  runApp(const MyApp());
 }
 
-class MiApp extends StatelessWidget {
-  const MiApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pokédex mínima',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.red),
+      theme: ThemeData(colorSchemeSeed: Colors.red, useMaterial3: true),
       home: const PokedexScreen(),
     );
   }
