@@ -12,8 +12,19 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      child: Padding(
+      clipBehavior: Clip.antiAlias,
+      child: Container(
         padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              colorDeTipo(pokemon.tipos.first).withAlpha(90),
+              Theme.of(context).cardColor,
+            ],
+          ),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
