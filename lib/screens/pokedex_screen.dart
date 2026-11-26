@@ -47,6 +47,15 @@ class _PokedexScreenState extends State<PokedexScreen> {
                 ),
                 labelText: 'Nombre o número del Pokémon',
                 prefixIcon: const Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () {
+                    _controlador.clear();
+                    setState(() {
+                      _futuro = null;
+                    });
+                  },
+                ),
               ),
               onSubmitted: (_) => _buscar(),
             ),
