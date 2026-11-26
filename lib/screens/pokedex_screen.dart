@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../models/pokemon.dart';
@@ -23,6 +25,12 @@ class _PokedexScreenState extends State<PokedexScreen> {
     setState(() {
       _futuro = obtenerPokemon(texto);
     });
+  }
+
+  void _aleatorio() {
+    final id = Random().nextInt(898) + 1;
+    _controlador.text = '$id';
+    _buscar();
   }
 
   @override
@@ -60,7 +68,18 @@ class _PokedexScreenState extends State<PokedexScreen> {
               onSubmitted: (_) => _buscar(),
             ),
             const SizedBox(height: 12),
-            ElevatedButton(onPressed: _buscar, child: const Text('Buscar')),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: _buscar, child: const Text('Buscar')),
+                const SizedBox(width: 12),
+                OutlinedButton.icon(
+                  onPressed: _aleatorio,
+                  icon: const Icon(Icons.casino),
+                  label: const Text('Aleatorio'),
+                ),
+              ],
+            ),
             const SizedBox(height: 16),
             Expanded(
               child: _futuro == null
