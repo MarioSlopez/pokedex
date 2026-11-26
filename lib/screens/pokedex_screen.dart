@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/pokemon.dart';
 import '../services/pokeapi_service.dart';
+import '../widgets/pokemon_card.dart';
 
 class PokedexScreen extends StatefulWidget {
   const PokedexScreen({super.key});
@@ -75,31 +76,7 @@ class _PokedexScreenState extends State<PokedexScreen> {
                         // Estado: éxito
                         final pokemon = snapshot.data!;
                         return SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Image.network(pokemon.imagen, height: 200),
-                              const SizedBox(height: 8),
-                              Text(
-                                '#${pokemon.id} ${pokemon.nombre}',
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 8,
-                                children: pokemon.tipos
-                                    .map((t) => Chip(label: Text(t)))
-                                    .toList(),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                '${pokemon.altura} m · ${pokemon.peso} kg',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
+                          child: PokemonCard(pokemon: pokemon),
                         );
                       },
                     ),
