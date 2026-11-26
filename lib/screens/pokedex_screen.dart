@@ -11,14 +11,14 @@ class PokedexScreen extends StatefulWidget {
 }
 
 class _PokedexScreenState extends State<PokedexScreen> {
-  final _controlador = TextEditingController();
-  Future<Pokemon>? _futuroPokemon;
+  final TextEditingController _controlador = TextEditingController();
+  Future<Pokemon>? _futuro;
 
   void _buscar() {
     final texto = _controlador.text.trim();
     if (texto.isEmpty) return;
     setState(() {
-      _futuroPokemon = obtenerPokemon(texto);
+      _futuro = obtenerPokemon(texto);
     });
   }
 
@@ -39,27 +39,68 @@ class _PokedexScreenState extends State<PokedexScreen> {
             TextField(
               controller: _controlador,
               decoration: const InputDecoration(
-                labelText: 'Nombre o número del Pokémon',
                 border: OutlineInputBorder(),
+                labelText: 'Nombre o número del Pokémon',
               ),
-              textInputAction: TextInputAction.search,
               onSubmitted: (_) => _buscar(),
             ),
             const SizedBox(height: 12),
-            FilledButton(onPressed: _buscar, child: const Text('Buscar')),
-            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _buscar,
+              child: const Text('Buscar'),
+            ),
+            const SizedBox(height: 16),
             Expanded(
-              child: _futuroPokemon == null
-                  ? const Center(
-                      child: Text('Escribe un nombre y presiona Buscar'),
-                    )
+              child: _futuro == null
+                  ? const Center(child: Text('Escribe un nombre o un número'))
                   : FutureBuilder<Pokemon>(
-                      future: _futuroPokemon,
+                      future: _futuro,
                       builder: (context, snapshot) {
-                        // INICIO TODO 3
-                        // TODO 3: mostrar carga, error y éxito
-                        return const Center(child: Text('TODO 3'));
-                        // FIN TODO 3
+                        // Estado: cargando
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        // Estado: error
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                              '${snapshot.error}'.replaceFirst('Exception: ', ''),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        }
+                        // Estado: éxito
+                        final pokemon = snapshot.data!;
+                        return SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Image.network(pokemon.imagen, height: 200),
+                              const SizedBox(height: 8),
+                              Text(
+                                '#${pokemon.id} ${pokemon.nombre}',
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Wrap(
+                                spacing: 8,
+                                children: pokemon.tipos
+                                    .map((t) => Chip(label: Text(t)))
+                                    .toList(),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                '${pokemon.altura} m · ${pokemon.peso} kg',
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
             ),
