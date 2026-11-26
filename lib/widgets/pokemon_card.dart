@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../models/pokemon.dart';
+import '../utils/tipo_color.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
@@ -24,7 +26,12 @@ class PokemonCard extends StatelessWidget {
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              children: pokemon.tipos.map((t) => Chip(label: Text(t))).toList(),
+              children: pokemon.tipos
+                  .map((t) => Chip(
+                        label: Text(t),
+                        backgroundColor: colorDeTipo(t).withAlpha(60),
+                      ))
+                  .toList(),
             ),
             const SizedBox(height: 8),
             Text(
