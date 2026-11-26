@@ -41,9 +41,12 @@ class _PokedexScreenState extends State<PokedexScreen> {
           children: [
             TextField(
               controller: _controlador,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 labelText: 'Nombre o número del Pokémon',
+                prefixIcon: const Icon(Icons.search),
               ),
               onSubmitted: (_) => _buscar(),
             ),
