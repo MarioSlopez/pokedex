@@ -38,16 +38,36 @@ class PokemonCard extends StatelessWidget {
             Wrap(
               spacing: 8,
               children: pokemon.tipos
-                  .map((t) => Chip(
-                        label: Text(t),
-                        backgroundColor: colorDeTipo(t).withAlpha(60),
-                      ))
+                  .map(
+                    (t) => Chip(
+                      label: Text(t),
+                      backgroundColor: colorDeTipo(t).withAlpha(60),
+                    ),
+                  )
                   .toList(),
             ),
             const SizedBox(height: 8),
             Text(
               '${pokemon.altura} m · ${pokemon.peso} kg',
               style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 12),
+            ...pokemon.stats.entries.map(
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Row(
+                  children: [
+                    SizedBox(width: 130, child: Text(e.key)),
+                    SizedBox(width: 32, child: Text('${e.value}')),
+                    Expanded(
+                      child: LinearProgressIndicator(
+                        value: (e.value / 255).clamp(0.0, 1.0),
+                        minHeight: 8,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
