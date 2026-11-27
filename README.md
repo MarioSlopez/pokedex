@@ -16,4 +16,4 @@ flutter pub get
 flutter run
 ## 📄 Reporte
 
-Reporte_Pokedex_Redisenio_Mario_Diego.pdf
+[Ver Reporte del rediseño del Pokédex](https://github.com/MarioSlopez/pokedex/blob/main/Reporte_Pokedex_Redisenio_Mario_Diego.pdf)
