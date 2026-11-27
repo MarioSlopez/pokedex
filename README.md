@@ -14,3 +14,6 @@ imagen, id, tipos, altura, peso y estadísticas.
 ## Ejecutar
 flutter pub get
 flutter run
+## 📄 Reporte
+
+[Reporte del rediseño del Pokédex (PDF)](Reporte_Pokedex_Rediseno_Mario_Diego.pdf)
